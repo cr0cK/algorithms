@@ -11,13 +11,22 @@
 
 
 # Definition for singly-linked list.
-class ListNode:
+class ListNode(object):
     def __init__(self, x):
         self.val = x
         self.next = None
 
+    def deserialize(self):
+        values = []
+        node = self
+        while node:
+            values.append(node.val)
+            node = node.next
 
-class Solution:
+        return values
+
+
+class Solution(object):
     # @param a ListNode
     # @return a ListNode
     def swapPairs(self, head):
@@ -53,15 +62,6 @@ class Solution:
         return root.next
 
 
-def printList(node):
-    values = []
-    while node:
-        values.append(node.val)
-        node = node.next
-
-    print(values)
-
-
 def createList(l):
     head = None
     prevNode = None
@@ -83,11 +83,11 @@ def createList(l):
 l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
 chain = createList(l)
 
-printList(chain)
+print(chain.deserialize())
 
 s = Solution()
 chain = s.swapPairs(chain)
 
 print('--')
 
-printList(chain)
+print(chain.deserialize())
