@@ -30,12 +30,19 @@ class Solution(object):
     # @param a ListNode
     # @return a ListNode
     def swapPairs(self, head):
+        if not isinstance(head, ListNode):
+            return head
+
         root = ListNode(0)
         root.next = head
         prev = root
 
         while True:
             # 2 > 1 > 3 > 4
+
+            # if there is only one element, can swap
+            if head.next is None:
+                return head
 
             # next_ => 3
             next_ = head.next.next
