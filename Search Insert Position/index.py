@@ -27,44 +27,21 @@ class Solution(object):
         O(log(n))
         """
 
-        A = A[:]
+        n = len(A)
+        if not target:
+            return -1
+        if target > A[n - 1]:
+            return A[-1]
 
-        if target not in A:
-            A.append(target)
-            A.sort()
-
-        left, right = 0, len(A) - 1
-        found = False
-
-        if len(A) <= 2:
-            if A[0] == target:
-                return 0
-            if A[1] == target:
-                return 1
-            return None
-
-        while left <= right and not found:
-            middle = (left + right) / 2
-
-            # because the result of the division is floored
-            if left and middle == left:
-                middle += 1
-
-            value = A[middle]
-
-            if value == target:
-                found = True
-                break
+        left, right = 0, n - 1
+        while (left < right):
+            mid = left + (right - left) / 2
+            if A[mid] < target:
+                left = mid + 1
             else:
-                if target < value:
-                    right = middle
-                elif target > value:
-                    left = middle
+                right = mid
 
-        if not found:
-            return None
-
-        return middle
+        return left
 
     @profile
     def searchInsert2(self, A, target):
@@ -81,10 +58,10 @@ class Solution(object):
 
 s = Solution()
 
-A_ = range(0, 1000000)
-print(s.searchInsert(A_, 999999))
+A_ = range(1, 999)
+print(s.searchInsert(A_, 999 / 2))
 
-# A_ = [1, 3, 5, 6]
+A_ = [1, 3, 5, 6]
 
-# for i in range(0, 8):
-#     print(i, s.searchInsert(A_, i))
+for i in range(0, 8):
+    print(i, s.searchInsert(A_, i))
